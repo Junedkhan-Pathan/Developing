@@ -1,0 +1,17 @@
+                   ----------------------------ExpressJS-------------------------
+
+npm init -y          //for create pakage.json file with by default detail.
+
+npm i express       //for install express
+const express = require('express')
+
+
+const app = express(); //to use all mehtod of express through the app variable so we store in it. 
+
+const PORT = process.env.PORT || 3000  //for available port.
+
+app.listen(PORT,()=>{            //PORT is denote avlble port or on 3000
+    console.log(`server is now established on port${PORT}`)    //()=> callBack fun which tell us just message.
+});
+
+

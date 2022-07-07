@@ -1,0 +1,445 @@
+
+                           #     SQL commands   #
+SELECT column1, column2, ...                     //For specific column list
+FROM table_name;
+
+SELECT * FROM <Table NAME>                       //For all column list
+
+INSERT INTO table_name (column1, column2, column3, ...)       //For insert data into table
+VALUES (value1, value2, value3, ...);                        //we can add multiple data using , after one values bracket,
+
+INSERT INTO table_name                    //If insert all coulumn data then no need to specify.
+VALUES (value1, value2, value3, ...);
+
+                  ___________WHERE CLOUSE AN OPERETORS___________________
+
+SELECT column/* FROM table_name WHERE condition;
+
+- we can make condition by use of below opertors:
+
+Operator	       Description	
+   =	            Equal	
+   >	            Greater than	
+   <	            Less than	
+   >=	            Greater than or equal	
+   <=	            Less than or equal	
+   <>	            Not equal. Note: In some versions of SQL this operator may be written as !=	
+   BETWEEN	        Between a certain range	
+   LIKE	            Search for a pattern	
+   IN	            To specify multiple possible values for a column
+
+-In and also use logical operator that is AND , OR ,NOT ;
+-also there are 'IN' Operator which are better for the many OR.
+ ex:  WHERE city = 'bvn' OR city= 'surat' OR city = 'Rjkot' can writ as WHERE city IN('bvn','surat','Rjkot');
+
+-same as 'NOT IN' also used..if apply in above query it return the all data except above IN data..
+
+-BETWEEN : is used to find the perticular range of data like as...
+ex : WHERE age BETWEEN 18 AND 22 : so it give 18 to 22 range age data..
+     WHERE name BETWEEN 'a' AND 'f' : so it give start name of a to f range name. same we can use date or etc.
+
+-same as we can use 'NOT BETWEEN' to find witout data which are not in range.
+
+                         __________LIKE & WILDCARD Operator____________
+
+-we use LIKE operator with wildcard to find specific record by name,number etc..
+
+-The percent sign (%) represents zero, one, or multiple characters;
+-The underscore sign (_) represents one, single character
+
+SELECT column1, column2, ...             
+FROM table_name
+WHERE columnN LIKE pattern;     
+  
+          LIKE Operator	               Description
+     LIKE 'a%'	           Finds any values that start with "a"
+     LIKE '%a'	           Finds any values that end with "a"
+     LIKE '%or%'           Finds any values that have "or" in any position
+     LIKE '_r%'	           Finds any values that have "r" in the second position
+     LIKE 'a_%'	           Finds any values that start with "a" and are at least 2 characters in length
+     LIKE 'a__%'	       Finds any values that start with "a" and are at least 3 characters in length
+     LIKE 'a%o'	           Finds any values that start with "a" and ends with "o"
+
+-If we want to case Insensitive then write 'BINARY' before that coloumn name;
+SELECT * FROM table_name
+WHERE BINARY name LIKE 'R%';        //it give only that record which name start with Capital R not small r. 
+
+
+
+                            __________Alias (AS)___________ 
+-We can changed our column name to show different name by key word AS ...
+
+SELECT name AS student,city AS location from data WHERE age >18 ;
+
+                            ___________Regular Expression (REGEXP)________
+                    
+-It is perfect Search tools..
+
+SELECT * FROM table_name WHERE column_name REGEXP Pattern;
+                        
+Pattern                             	What the Pattern matches
+*	               Zero or more instances of string preceding it
++	               One or more instances of strings preceding it
+.	               Any single character
+?	               Match zero or one instances of the strings preceding it.
+^	               caret(^) matches Beginning of string
+$	               End of string
+[abc]	           Any character listed between the square brackets
+[^abc]	           Any character not listed between the square brackets
+[A-Z]	           match any upper case letter.
+[a-z]	           match any lower case letter
+[0-9]	           match any digit from 0 through to 9.
+[[:<:]]	           matches the beginning of words.
+[[:>:]]            matches the end of words.
+[:class:]	       matches a character class i.e. [:alpha:] to match letters, [:space:] to match white space, [:punct:] is match punctuations and [:upper:] for upper class letters.
+p1|p2|p3	       Alternation; matches any of the patterns p1, p2, or p3
+{n}	               n instances of preceding element
+{m,n}	           m through n instances of preceding element
+
+examples:
+
+Examples with explanation :
+
+Gives all the names starting with ‘sa’.Example- sam,samarth.
+SELECT name FROM student_tbl WHERE name REGEXP '^sa';
+
+Gives all the names ending with ‘on’.Example – norton,merton.
+SELECT name FROM student_tbl WHERE name REGEXP 'on$';
+
+Gives all the titles containing ‘com’.Example – comedy , romantic comedy.
+SELECT title FROM movies_tbl WHERE title REGEXP 'com?'; 
+
+matches any of the patterns p1, p2, or p3(p1|p2|p3):
+Gives all the names containing ‘be’ or ‘ae’.Example – Abel, Baer.
+SELECT name FROM student_tbl WHERE name REGEXP 'be|ae' ;
+
+Matches any character listed between the square brackets([abc]):
+Gives all the names containing ‘j’ or ‘z’.Example – Lorentz, Rajs.
+SELECT name FROM student_tbl WHERE name REGEXP '[jz]' ;
+
+Matches any lower case letter between ‘a’ to ‘z’- ([a-z]) ([a-z] and (.)):
+Retrieve all names that contain a letter in the range of ‘b’ and ‘g’, followed by any character, followed by the letter ‘a’.Example – Tobias, sewall.
+Matches any single character(.
+SELECT name FROM student_tbl WHERE name REGEXP '[b-g].[a]' ;
+
+Matches any character not listed between the square brackets.([^abc]):
+Gives all the names not containing ‘j’ or ‘z’. Example – nerton, sewall.
+SELECT name FROM student_tbl WHERE name REGEXP '[^jz]' ;
+
+Matches the end of words[[:>:]]:
+Gives all the titles ending with character “ack”. Example – Black.
+SELECT title FROM movies_tbl WHERE REGEXP 'ack[[:>:]]'; 
+
+Matches the beginning of words[[:<:]]:
+Gives all the titles starting with character “for”. Example – Forgetting Sarah Marshal.
+SELECT title FROM movies_tbl WHERE title REGEXP '[[:<:]]for'; 
+
+Matches a character class[:class:]:
+i.e [:lower:]- lowercase character ,[:digit:] – digit characters etc.
+Gives all the titles containing alphabetic character only. Example – stranger things, Avengers.
+SELECT title FROM movies_tbl WHERE REGEXP '[:alpha:]' ;
+
+                              ____________Order By and DISTINCT____________________ 
+
+Order By : It is use for the ordering the data in ascending or desceinding order.
+DISTINCT : It is use for the get that data which are distinct not duplicat.
+
+SELECT column1, column2, ...           
+FROM table_name
+ORDER BY column1, column2, ... ASC|DESC;
+
+SELECT DISTINCT column1, column2, ...
+FROM table_name;
+                                       
+                               __________IS NULL & IS NOT NULL____________ 
+ 
+-To check the colum value is null or not null.
+
+SELECT column_names             // It give that data which is null;
+FROM table_name
+WHERE column_name IS NULL;  
+
+SELECT column_names             //It give that data which is NOT null
+FROM table_name
+WHERE column_name IS NOT NULL;
+
+                           __________LIMIT & OFFSET_____________
+
+-LIMIT is use to show limited numer of record.
+
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+LIMIT N;                      //N is numer of record which want to show  
+
+-Offset is not key word,if you want to show specific number to record that is called Offset.
+
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+LIMIT M,N;            //M:give record from M number, to N number of record.
+
+                       ____________________Aggregate Function__________________
+
+-It is funtion which give us COUNT,MAX,MIN,SUM,AVG of data.
+
+SELECT MIN(column_name)    //It give that row wich are min in data.
+FROM table_name
+WHERE condition;
+
+SELECT MAX(column_name)     //It give that data which are higest in data.
+FROM table_name
+WHERE condition;
+
+SELECT COUNT(column_name)    //It give numbers of record in data.
+FROM table_name
+WHERE condition;
+
+SELECT AVG(column_name)     //It give avrage of that column data.
+FROM table_name
+WHERE condition;
+
+SELECT SUM(column_name)     //It give sum of that column data.
+FROM table_name
+WHERE condition;
+
+                          ______________Update data___________
+-It is use for the update existing data.
+
+UPDATE table_name                    
+SET column1 = value1, column2 = value2, ...         //we can update one or many column data
+WHERE condition;                           // if we not use WHERE condition then it update and all same data.
+
+                      _______________ROLLBACK & COMMIT________________
+
+ROLLBACK; : It is use to revert or undo the commands till the commited commands;
+COMMIT : It is use to save permonent save,we can't ROLLBACK .
+ 
+ ex: UPDATE marks SET persentage = 79 WHERE id = 2;
+     COMMIT;                             //All data update and save permonent till it command run.
+     UPDATE marks SET persentage = 69 WHERE id = 4;  
+     ROLLBACK;           //If we want undo the commands then we cant ROLLBACK and it give that data till last commited.
+
+                    _______________DELETE data_____________________
+
+-It is use for the update existing data.
+
+DELETE FROM table_name                    
+WHERE condition;                // if we not use WHERE condition then it delete all data.
+
+                         ______________JOINS_____________________
+   
+-A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+ 1 :- INNER JOIN : It gives that data which mathed with both table....
+
+SELECT * FROM table_1 INNER JOIN table_2                             //basic syntex match data retrieve
+ON table_1.foreigKeyColumnName = table_2.PrimaryKeyColmnName;        //we can just write JOIN for INNERJOIN.
+                                                                    
+SELECT * FROM table_1 as t1 JOIN table_2 as t2                     //we can types alias for table names to reduce the query
+ON t1.foreigKeyColumnName = t2.PrimaryKeyColmnName;   
+
+SELECT t1.ColumnName1,t1.ColumnName2,t2.ColumnName1    //We can also get specific column from tables
+FROM table_1 as t1 JOIN table_2 as t2                  
+ON t1.foreigKeyColumnName = t2.PrimaryKeyColmnName; 
+
+SELECT t1.ColumnName1,t1.ColumnName2,t2.ColumnName1    //We can also get specific column from tables which is relvent
+FROM table_1 as t1 JOIN table_2 as t2                    with match condition and also can ORDER BY,GROUP BY,LIMIT,                  
+ON t1.foreigKeyColumnName = t2.PrimaryKeyColmnName       etc...according to need
+WHERE condition; 
+
+2 : -LEFT JOIN: It gives LEFT table all data and gives RIGHT means table 2 data which are matched..
+
+SELECT t1.ColumnName1,t1.ColumnName2,t2.ColumnName1    //We can also get specific column from tables which is relvent
+FROM table_1 t1 RIGHT JOIN table_2 t2                    with match condition and also can ORDER BY,GROUP BY,LIMIT,                  
+ON t1.foreigKeyColumnName = t2.PrimaryKeyColmnName       etc...according to need
+WHERE condition; 
+
+3 : -RIGHT JOIN: It gives RIGHT table all data and gives LEFT means table 2 data which are matched..
+
+SELECT t1.ColumnName1,t1.ColumnName2,t2.ColumnName1    //We can also get specific column from tables which is relvent
+FROM table_1 t1 RITHT JOIN table_2 t2                    with match condition and also can ORDER BY,GROUP BY,LIMIT,                  
+ON t1.foreigKeyColumnName = t2.PrimaryKeyColmnName       etc...according to need
+WHERE condition; 
+
+4.CROSS JOIN: It not widely used.It muliply data with other table data.
+
+SELECT * FROM table_1 CROSS JOIN table_2 ;             //basic syntex multiply data retrieve; 
+
+SELECT t1.ColumnName1,t1.ColumnName2,t2.ColumnName1    //can use 'comma(,)' instace of CROSS JOIN keyword.
+FROM table_1 as t1 , table_2 as t2,
+
+                         _______________MULTIPLE JOIN___________________ 
+
+SELECT * FROM table_1 t1 INNERJOIN                             //like as we can use all above joins with multiple tables.
+table_2 t2 ON t1.foreigKeyColumnName = t2.PrimaryKeyColmnName
+INNER JOIN table_3 t3 ON 
+t1.foreigKeyColumnName = t3.PrimaryKeyColmnName; 
+
+                        _________________GROUP BY & HAVING clouse________
+
+GROUP BY : It is always used with aggregate functions to group the row data.
+
+SELECT coloumnName,AggregateFunc(columName) FROM table_name
+GROUP BY coloumnName;                                      //we can also add other clousers..
+
+HAVING : It is one type of WHERE clouse,bcz we can't use two WHERE clause in query and it mostly used with GROUP BY.
+
+SELECT coloumnName,AggregateFunc(columName) FROM table_name
+GROUP BY coloumnName
+HAVING condition                             //Always put below in GROUP BY clause.
+ORDER BY coloumnName;
+
+                           ______________Nested(sub) Quiery_____________
+
+-When we put the query in the WHERE clause then it's called Nested query.
+
+SELECT columns 
+FROM table_name 
+WHERE coloumn = (SELECT coloumn FROM table_name WHERE condition);
+
+-The sub query is work for all like SELECT,INSERT,UPDATE,DELETE...
+
+                         ____________EXIST & NOT EXIST_________________
+
+EXIST : It used to test for the existence of any record in a subquery.
+        Itreturns TRUE if the subquery returns one or more records.
+
+SELECT column_names
+FROM table_name
+WHERE EXISTS
+(SELECT column_name FROM table_name WHERE condition);
+
+NOT EXIST: It is oppsite of exist.
+
+                    ________________UNION & UNION ALL____________________
+
+The UNION operator is used to combine the result-set of two or more SELECT statements.
+
+  -Every SELECT statement within UNION must have the same number of columns.
+  -The columns must also have similar data types.
+  -The columns in every SELECT statement must also be in the same order.
+
+SELECT column_name(s) FROM table1;             
+UNION / UNION ALL                  //UNION gives only distinct value not show the duplicate values.wheres UNION ALL gives.
+SELECT column_name(s) FROM table2;    /We can also use other clauses with it.
+
+                         _______________IF clause______________
+
+-It is used to check thde condition and show the out put accordingly.
+
+SELECT coloumnNames 
+IF(condition,TRUE_Result which you want to show,FALSE_Result which you want to show) AS alisa_Name
+FROM table_name;
+
+
+                  __________________Arithmetic Functions______________________
+                  
+                  
+                  __________________ Stiring Functions______________________
+
+
+
+
+
+                  ___________________Date Functions______________________
+
+select current_date();  //it gives us to current date 
+select curdate();       //it also same as
+ 
+select sysdate();    //it give us system date and time 
+select now();        //it give now date and time
+
+//it gives from the passed parameter which we want
+
+SELECT DATE('1990-09-02 11:05:43') AS DATE   //it gives Date from passed parameter.
+SELECT TIME('1990-09-02 11:05:43') AS TIME   //it gives TIME from passed parameter.
+SELECT MONTH('1990-09-02 11:05:43') AS MONTH   //it gives MONTH from passed parameter.
+SELECT WEEK('1990-09-02 11:05:43') AS WEEK   //it gives WEEK from passed parameter of that year
+SELECT DAY('1990-09-02 11:05:43') AS DAY   //it gives DAY from passed parameter.
+SELECT DAYOFMONTH('1990-09-02 11:05:43') AS DAYOFMONTH   //it gives DAYOFMONTH from passed parameter.
+SELECT DAYOFWEEK('1990-09-02 11:05:43') AS DAYOFWEEK   //it gives DAYOFWEEK from passed parameter.
+SELECT DAYNAME('1990-09-02 11:05:43') AS DAYNAME   //it gives DAYNAME from passed parameter.
+SELECT DAYOFYEAR('1990-09-02 11:05:43') AS DAYOFYEAR   //it gives DAYOFYEAR from passed parameter.
+SELECT MONTHNAME('1990-09-02 11:05:43') AS MONTH   //it gives MONTH from passed parameter.
+SELECT HOUR('1990-09-02 11:05:43') AS HOUR   //it gives HOUR from passed parameter.
+
+
+SELECT ADDDATE('1990-09-02 11:05:43' ,INTERVAL 10 day) AS newDate   //it ADD 10 day in that date 
+SELECT ADDDATE('1990-09-02 11:05:43' ,INTERVAL 2 MONTH) AS newDate   //it add 1 MONTH in date
+SELECT ADDDATE('1990-09-02 11:05:43' ,INTERVAL 1 YEAR) AS newDate   //it add 1 YEAR in date
+SELECT ADDDATE('1990-09-02 11:05:43' ,INTERVAL 2 QUARTER) AS newDate   //it add 1 QUARTER in date
+SELECT ADDDATE('1990-09-02 11:05:43' ,INTERVAL 2 anyParameter) AS newDate   //it add any parameter in date
+
+SELECT DATE_FORMAT(MySqlFormat date, wildcard of date funtions to make format)
+SELECT STR_TO_DATE(Date, wildcard of date funtions to make sql format)
+
+
+SELECT QUARTER('1990-09-02 11:05:43') AS quarter   //it gives quarter from passed parameter.
+-quarter means 12/4 of year of month.
+
+select EXTRACT(DAY FROM '1990-09-02 11:05:43') //we can pass any parameter instace of day and extracts we want.
+
+//For References...
+ Functions                                       	    Description
+ADDDATE()	            MySQL ADDDATE() adds a time value with a date.
+ADDTIME()	            In MySQL the ADDTIME() returns a time or datetime after adding a time value with a time or datetime.
+CONVERT_TZ()	       In MySQL the CONVERT_TZ() returns a resulting value after converting a datetime value from a time zone specified as the second argument to the time zone specified as the third argument.
+CURDATE()	            In MySQL the CURDATE() returns the current date in 'YYYY-MM-DD' format or 'YYYYMMDD' format depending on whether numeric or string is used in the function.
+CURRENT_DATE()        In MySQL the CURRENT_DATE returns the current date in ‘YYYY-MM-DD’ format or YYYYMMDD format depending on whether numeric or string is used in the function.
+CURRENT_TIME()	       In MySQL the CURRENT_TIME() returns the current time in ‘HH:MM:SS’ format or HHMMSS.uuuuuu format depending on whether numeric or string is used in the function.
+CURRENT_TIMESTAMP()	  In MySQL the CURRENT_TIEMSTAMP returns the current date and time in ‘YYYY-MM-DD HH:MM:SS’ format or YYYYMMDDHHMMSS.uuuuuu format depending on whether numeric or string is used in the function.
+CURTIME()	            In MySQL the CURTIME() returns the value of current time in ‘HH:MM:SS’ format or HHMMSS.uuuuuu format depending on whether numeric or string is used in the function.
+DATE_ADD()            MySQL DATE_ADD() adds time values (as intervals) to a date value. The ADDDATE() is the synonym of DATE_ADD().
+DATE_FORMAT()	       MySQL DATE_FORMAT() formats a date as specified in the argument. A list of format specifiers given bellow may be used to format a date.
+DATE_SUB()	       MySql date_sub() function subtract a time value (as interval) from a date.
+DATE()	            MySQL DATE() takes the date part out from a datetime expression.
+DATEDIFF()	       MySQL DATEDIFF() returns the number of days between two dates or datetimes.
+DAY()	            MySQL DAY() returns the day of the month for a specified date.
+DAYNAME()	            MySQL DAYNAME() returns the name of the week day of a date specified in the argument.
+DAY OF MONTH()	       MySQL DAYOFMONTH() returns the day of the month for a given date.
+DAY OF WEEK()	       MySQL DAYOFWEEK() returns the week day number (1 for Sunday,2 for Monday …… 7 for Saturday ) for a date specified as an argument.
+DAY OF YEAR()	       MySQL DAYOFYEAR() returns day of the year for a date. The return value is within the range of 1 to 366.
+EXTRACT()	            MySQL EXTRACT() extracts a part of a given date.
+FROM_DAYS()	       MySQL FROM_DAYS() returns a date against a datevalue.
+FROM_UNIXTIME()	  MySQL FROM_UNIXTIME() returns a date /datetime from a version of unix_timestamp.
+GET_FORMAT()	       MySQL GET_FORMAT() converts a date or time or datetime in a formatted manner as specified in the argument.
+HOUR()	            MySQL HOUR() returns the hour of a time.
+LAST_DAY()	       MySQL LAST_DAY() returns the last day of the corresponding month for a date or datetime value.
+LOCALTIME()	       MySQL LOCALTIME returns the value of current date and time in ‘YYYY-MM-DD HH:MM:SS’ format or YYYYMMDDHHMMSS.uuuuuu format depending on the context (numeric or string) of the function.
+LOCALTIMESTAMP()	  MySQL LOCALTIMESTAMP returns the value of current date and time in ‘YYYY-MM-DD HH:MM:SS’ format or YYYMMDDHHMMSS.uuuuuu format depending on the context (numeric or string) of the function.
+MAKEDATE()	       MySQL MAKEDATE() returns a date by taking a value of a year and a number of days. The number of days must be greater than 0 otherwise a NULL will be returned.
+MAKETIME()	       MySQL MAKETIME() makes and returns a time value from a given hour, minute and seconds.
+MICROSECOND()	       MySQL MICROSECOND() returns microseconds from the time or datetime expression.
+MINUTE()	            MySQL MINUTE() returns a minute from a time or datetime value.
+MONTH()	            MySQL MONTH() returns the month for the date within a range of 1 to 12 ( January to December).
+MONTHNAME()	       MySQL MONTHNAME() returns the full name of the month for a given date.
+NOW()	            MySQL NOW() returns the value of current date and time in ‘YYYY-MM-DD HH:MM:SS’ format or YYYYMMDDHHMMSS.uuuuuu format depending on the context (numeric or string) of the function.
+PERIOD_ADD()	       MySQL PERIOD_ADD() adds a number of months with a period and returns the value in the format YYYYMM OR YYMM. Remember that the format YYYYMM and YYMM are not date values.
+PERIOD_DIFF()	       MySQL PERIOD_DIFF() returns the difference between two periods.
+QUARTER()        	  MySQL QUARTER() returns the quarter of the year for a date.
+SEC_TO_TIME()	       MySQL SEC_TO_TIME() returns a time value by converting the seconds specified in the argument.
+SECOND()         	  MySQL SECOND() returns the second for a time.
+STR_TO_DATE()	       MySQL STR_TO_DATE() returns a datetime value by taking a string and a specific format string as arguments.
+SUBDATE()	            MySQL SUBDATAE() subtracts a time value (as interval) from a given date.
+SUBTIME()	            MySQL SUBTIME() subtracts one datetime value from another.
+SYSDATE()	            MySQL SYSDATE() returns the current date and time in YYYY-MM-DD HH:MM:SS or YYYYMMDDHHMMSS.uuuuuu format depending on the context of the function.
+TIME_FORMAT()	       MySQL TIME_FORMAT() converts a time in a formatted string using the format specifiers.
+TIME_TO_SEC()	       MySQL TIME_TO_SEC() converts a time value in to seconds.
+TIME()	            MySQL TIME() extracts the time part of a time or datetime expression as string format.
+TIMEDIFF()	       MySQL TIMEDIFF() returns the differences between two time or datetime expressions.
+TIMESTAMP()	       MySQL TIMESTAMP() returns a datetime value against a date or datetime expression.
+TIMESTAMPADD()	       MySQL TIMESTAMPADD() adds time value with a date or datetime value.
+TIMESTAMPDIFF()	  MySQL the TIMESTAMPDIFF() returns a value after subtracting a datetime expression from another.
+TO_DAYS()	            MySQL TO_DAYS() returns number of days between a given date and year 0.
+UNIX_TIMESTAMP()	  MySQL UNIX_TIMESTAMP() returns a Unix timestamp in seconds since '1970-01-01 00:00:00' UTC as an unsigned integer if no arguments are passed with UNIT_TIMESTAMP().
+UTC_DATE()	       MySQL UTC_DATE returns the current UTC (Coordinated Universal Time) date as a value in 'YYYY-MM-DD' or YYYYMMDD format depending on the context of the function i.e. in a string or numeric context.
+UTC_TIME()	       MySQL UTC_TIME returns the current UTC time as a value in 'HH:MM:SS' or HHMMSS format depending on the context of the function i.e. in a string or numeric context.
+UTC_TIMESTAMP()	  In MySQL the UTC_TIMESTAMP returns the current UTC date and time as a value in 'YYYY-MM-DD HH:MM:SS' or YYYYMMDDHHMMSS.uuuuuu format depending on the usage of the function i.e. in a string or numeric context.
+WEEK()	            MySQL WEEK() returns the week number for a given date.
+WEEKDAY()	            MySQL WEEKDAY() returns the index of the day in a week for a given date (0 for Monday, 1 for Tuesday and ......6 for Sunday).
+WEEK OF YEAR()   	  MySQL WEEKOFYEAR() returns the calender week (as a number) of a given date.
+YEAR()	            MySQL YEAR() returns the year for a given date.
+YEARWEEK()	       MySQL YEARWEEK() returns year and week number for a given date.
+
+

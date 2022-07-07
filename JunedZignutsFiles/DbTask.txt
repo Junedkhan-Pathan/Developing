@@ -1,0 +1,89 @@
+CREATE DATABASE  task;
+
+CREATE TABLE Department(
+    id int NOT NULL AUTO_INCREMENT,
+    Name varchar(20) NOT NULL,
+    Created_Date Varchar(20) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+1. INSERT INTO Department(Name,Created_Date) VALUES
+   ("HR",'2016-01-01'),
+   ('WEB Dev',2016-01-01),
+   ('MobApp','2019-06-15'),
+   ('BA',2017-07-01);
+   ('QA',2017-07-01);
+
+
+
+CREATE TABLE Employees(
+    id int AUTO_INCREMENT NOT NULL,
+    Name varchar(20) NOT NULL,
+    Emp_No varchar(10) UNIQUE NOT NULL,
+    Dept_Id int NOT NULL,
+    Join_Date varchar(20) NOT NULL,
+    End_Date varchar(20) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(Dept_Id) REFERENCES Department(id)
+ );
+
+ 1.Insert into Employees(Name,Emp_No,Dept_Id,Join_Date,End_Date) VALUES
+    ('Juned','9898989898',2,'2022-05-09','2023-03-01'),
+    ('Mehul','8584879898',3,'2016-01-10','2019-01-01'),
+    ('Jatan','8198987777',4,'2017-04-16','2020-07-09'),
+    ('Faizan','9695949898',2,'2020-02-11','2023-03-13'),
+    ('Shreya','9698929195',5,'2018-01-09','2021-08-06'),
+    ('Nancy','6569624712',4,'2021-03-08','2022-04-03'),
+    ('Dharmik','9525252563',3,'2022-05-16','2023-05-16'),
+    ('saloni','7575289641',2,'2021-09-07','2024-04-13'),
+    ('zeba','9922547854',2,'2020-06-12','2022-04-03'),
+    ('Fayaz','9696636525',2,'2019-05-04','2022-08-01');
+
+CREATE TABLE Salary(
+    id int AUTO_INCREMENT NOT NULL,
+    Emp_Id int NOT NULL,
+    Month int NOT NULL,
+    Year int NOT NULL,
+    Amount FLOAT Default 00.00,
+    Gen_Date varchar(20) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(Emp_Id) REFERENCES Employees(id) 
+);
+
+INSERT INTO Salary(Emp_Id,Month,Year,Amount,Gen_Date)VALUES
+(1,1,2020,17000.00,2020-02-01),
+(2,1,2020,20000.13,2020-02-01),
+(3,1,2020,18000.25,2020-02-01),
+(4,1,2020,19000.50,2020-02-01),
+(5,1,2020,18550.36,2020-02-01),
+(6,1,2020,21000.45,2020-02-01),
+(7,1,2020,22500.16,2020-02-01),
+(8,1,2020,16400.45,2020-02-01),
+(9,1,2020,20400.58,2020-02-01),
+(10,1,2020,25000.00,2020-02-01),
+(3,2,2021,14600.00,2020-03-01),
+(2,2,2021,26000.45,2020-03-01),
+(5,2,2021,25500.56,2020-03-01),
+(7,2,2021,23000.45,2020-03-01),
+(9,2,2021,19600.36,2020-03-01);
+
+
+
+
+2.SELECT e.Name,e.Emp_No,e.Dept_Id,e.Join_Date,e.End_Date,d.Name,d.Created_Date,
+s.Emp_Id,s.Month,s.Year,s.Amount,s.Gen_Date from Employees e INNER JOIN Department d on
+e.Dept_Id = d.id Inner join Salary s on 
+s.Emp_Id = e.id;
+
+3.update
+update Employees set Dept_id = 1 where id = 8;
+update Employees set Name = 'karan' where Name = 'Juned';
+
+4.Delete
+
+delete from Salary where  id = 16;
+delete from Salary where Emp_Id = 7 AND Month=2;
+
+
+
+                            ______________________MONGODB task___________________-

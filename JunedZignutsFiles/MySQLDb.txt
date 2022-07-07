@@ -1,0 +1,169 @@
+
+                          #-----MySQL commands-----#
+
+CREATE DATABASE databasename;               //For creating DATABASE in MySQL.
+
+SHOW DATABASES;                             //For show database which we created
+
+DROP DATABASE databasename;                 // For delete database completely.(Loss all)
+
+CREATE TABLE table_name (                   // For Creatinhg table in database.
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+   ....
+);
+
+CREATE TABLE new_table_name AS              //If we want to create table same as another table
+    SELECT column1, column2,...                then we use it.    
+    FROM existing_table_name                   (It worked on using select * to use i tried) 
+    WHERE ....;
+
+
+                                 #----MySQL Constraints----#
+
+:->SQL constraints are used to specify rules for data in a table.
+:->It can be apply when we create by the CREATE or else After we do it with MODIFY that is ALTER.
+
+            NOT NULL -       :Ensures that a column cannot have a NULL value
+            UNIQUE -         :Ensures that all values in a column are different
+            PRIMARY KEY -    :A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+            FOREIGN KEY -    :Prevents actions that would destroy links between tables
+            CHECK - Ensures  :that the values in a column satisfies a specific condition
+            DEFAULT -        :Sets a default value for a column if no value is specified
+            CREATE INDEX -   :Used to create and retrieve data from the database very quickly
+              
+CREATE TABLE table_name (                   //TO apply constraint when we creating
+    column1 datatype constraint,
+    column2 datatype constraint,
+    column3 datatype constraint,
+    ....
+);
+
+ALTER TABLE table_name                      //TO apply constraint After created table.
+MODIFY <column_name> <datatype> Constraint
+
+
+Constraint    WHEN creating                    ALTER(modify)/After creating         Drop/Delete
+
+ NOT NULL :  CREATE TABLE Persons (               ALTER TABLE Persons 
+             ID int NOT NULL,                     MODIFY Age int NOT NULL;               
+             LastName varchar(255) NOT NULL,
+             FirstName varchar(255) NOT NULL,
+             Age int
+             );                                                         
+                                                        
+UNIQUE :     CREATE TABLE Persons (               ALTER TABLE Persons           ALTER TABLE Persons
+             ID int NOT NULL,                     ADD UNIQUE (ID);              DROP INDEX UC_Person; 
+             LastName varchar(255) NOT NULL,
+             FirstName varchar(255),
+             Age int,
+             UNIQUE (ID)                     
+             ); 
+              OR (for multiple column)
+
+             CREATE TABLE Persons (               ALTER TABLE Persons
+             ID int NOT NULL,                     ADD CONSTRAINT UC_Person 
+             LastName varchar(255) NOT NULL,        
+             FirstName varchar(255),
+             Age int,
+             CONSTRAINT UC_Person UNIQUE (ID,LastName)
+             );
+
+
+PRIMARY     CREATE TABLE Persons (                ALTER TABLE Persons               ALTER TABLE Persons
+KEY:        ID int NOT NULL,                      ADD PRIMARY KEY (ID);             DROP PRIMARY KEY;
+            LastName varchar(255) NOT NULL,
+            FirstName varchar(255),
+            Age int,
+             PRIMARY KEY (ID)
+            );
+                 OR (for multiple column)
+
+             CREATE TABLE Persons (              ALTER TABLE Persons
+             ID int NOT NULL,                    ADD CONSTRAINT PK_Person
+             LastName varchar(255) NOT NULL,     PRIMARY KEY (ID,LastName);
+             FirstName varchar(255),
+             Age int,
+             CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+            );
+
+FOREIGN     CREATE TABLE Orders (           ALTER TABLE Orders
+KEY :       OrderID int NOT NULL,           ADD FOREIGN KEY (PersonID) 
+            OrderNumber int NOT NULL,       REFERENCES Persons(PersonID);
+            PersonID int,                   
+            PRIMARY KEY (OrderID),
+            FOREIGN KEY (PersonID) 
+            REFERENCES Persons(PersonID)
+            );
+
+            CREATE TABLE Orders (          ALTER TABLE Orders                  ALTER TABLE Orders
+            OrderID int NOT NULL,          ADD CONSTRAINT FK_PersonOrder       DROP FOREIGN KEY FK_PersonOrder;
+            OrderNumber int NOT NULL,      FOREIGN KEY (PersonID) 
+            PersonID int,                  REFERENCES Persons(PersonID);
+            PRIMARY KEY (OrderID),
+            FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+            );
+
+CHECK :     CREATE TABLE Persons (          ALTER TABLE Persons
+            ID int NOT NULL,                ADD CHECK (Age>=18);
+            LastName varchar(255) NOT NULL,
+            FirstName varchar(255),
+            Age int CHECK (Age>=18)
+            );
+
+            CREATE TABLE Persons (            ALTER TABLE Persons                 ALTER TABLE Persons
+            ID int NOT NULL,                  ADD CONSTRAINT CHK_PersonAge        DROP CHECK CHK_PersonAge;
+            LastName varchar(255) NOT NULL,   CHECK (Age>=18 AND City='Sandnes');
+            FirstName varchar(255),
+            Age int,
+            City varchar(255),
+            CONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')
+            );
+
+DROP TABLE <table name>;                    //For delete table from database.
+TRUNCATE TABLE <table name>;                //For delete only table data schema remaining.
+
+                                #----ALTER TABLE to modify table----#
+:-> The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+:-> The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+  
+                                
+ALTER TABLE table_name                      //For add column in table.
+ADD column_name datatype;
+
+ALTER TABLE table_name                      //Drop column in table.
+DROP COLUMN column_name;
+
+
+ALTER TABLE table_name                      //To changed the datatype of column in table.
+MODIFY COLUMN column_name datatype;
+
+ALTER TABLE table_name                              //To oredering the column in table.
+MODIFY COLUMN column_name datatype
+AFTER existence coloumnName;
+
+ALTER TABLE table_name                      //To changed the the name of column in table.
+CHANGE column_name NewName datatype;
+
+ALTER TABLE table_name                      //To RENAME table.
+RENAME NewName;
+
+
+                            __________VIEWS_____________  
+
+VIEW: It is alredy maked table of past query to reduce that query write again and again.
+    
+
+CREATE VIEW taskView AS                 // Createing view...
+Select e.id,e.Name,e.Emp_No,e.Dept_Id,e.Join_Date,e.End_Date,Created_Date //query which we want to view
+From Employees e inner join Department d on 
+e.Dept_ID = d.id;
+
+select * from taskView        //Now we no need to write above query just write it..
+
+ALTER VIEW viewName AS         //To update veiws
+Query changes....
+                               
+
+DROP VIEW viewName;           //delete view..

@@ -1,0 +1,21 @@
+{
+  "name": "lern_express",
+  "version": "1.0.0",
+  "description": "Lerning express from coder'sGyan by junedkhan.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "express",
+    "Node",
+    "APIs"
+  ],
+  "author": "sumit sutariya",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1"
+  }
+}

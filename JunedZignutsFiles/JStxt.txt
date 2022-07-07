@@ -1,0 +1,316 @@
+                                                Function in js:
+
+  function name(parameter1, parameter2, parameter3) {
+    // code to be executed
+  }
+  function myFunction(p1, p2) {
+    return p1 * p2;   // The function returns the product of p1 and p2
+  }
+
+
+                                                  Objects in js
+
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+};
+
+person.lastName = "Pathan";
+console.log(person.lastName);
+console.log(person["firstName"]);
+const person = {
+  firstName: "John",
+  lastName : "Doe",
+  id       : 5566,
+  fullName : function(firstName,lastName) {
+    return  this.firstName + " " + this.lastName;
+},
+};
+
+console.log(person.fullName("Pathan","Junedkhan"));
+
+                                                Events
+
+onchange	 ::            An HTML element has been changed
+onclick	 ::            The user clicks an HTML element
+onmouseover	 ::            The user moves the mouse over an HTML element
+onmouseout	 ::            The user moves the mouse away from an HTML element
+onkeydown	 ::            The user pushes a keyboard key
+onload	 ::            The browser has finished loading the page
+
+                                              Strings
+
+let text = "We are the so-called \"Vikings\" from the north.";
+let text1 = `We are the so-called "Vikings" from the north.`;
+console.log(text1);
+let text21 = "Pathan                                                              Junedhan";
+document.write(text21); 
+
+let y = new String("John");        With new word and as object
+
+
+
+                                           String Methods
+
+Method	                                 Description
+charAt()            	 Returns the character at a specified index (position)
+charCodeAt()	         Returns the Unicode of the character at a specified index
+concat()	             Returns two or more joined strings
+endsWith()	                  Returns if a string ends with a specified value
+fromCharCode()	                  Returns Unicode values as characters
+includes()	                  Returns if a string contains a specified value
+indexOf()	                  Returns the index (position) of the first occurrence of a value in a string
+lastIndexOf()	                  Returns the index (position) of the last occurrence of a value in a string
+localeCompare()	                 Compares two strings in the current locale
+match()	                 earches a string for a value, or a regular expression, and returns the matches
+repeat()	                  Returns a new string with a number of copies of a string
+replace()	                  Searches a string for a value, or a regular expression, and returns a string where the values are replaced
+search()	                  Searches a string for a value, or regular expression, and returns the index (position) of the match
+slice()	                  Extracts a part of a string and returns a new string
+split()	                  Splits a string into an array of substrings
+startsWith()	                  Checks whether a string begins with specified characters
+substr()	                  Extracts a number of characters from a string, from a start index (position)
+substring()	                  Extracts characters from a string, between two specified indices (positions)
+toLocaleLowerCase()	                  Returns a string converted to lowercase letters, using the host's locale
+toLocaleUpperCase()	                  Returns a string converted to uppercase letters, using the host's locale
+toLowerCase()	                  Returns a string converted to lowercase letters
+toString()	                  Returns a string or a string object as a string
+toUpperCase()	                  Returns a string converted to uppercase letters
+trim()	                  Returns a string with removed whitespaces
+valueOf()	                  Returns the primitive value of a string or a string object
+                               
+                                  Search Methdo of String 
+String indexOf()
+String lastIndexOf()
+String startsWith()
+String endsWith()
+
+
+let txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let length = txt.length;
+
+let str = "Apple, Banana, Kiwi";
+let part = str.slice(7, 13);
+let part = str.slice(-12, -6);
+
+                                           Number & Its Methods
+Method	               Description
+isFinite()	               Checks whether a value is a finite number
+isInteger()	               Checks whether a value is an integer
+isNaN()	               Checks whether a value is Number.NaN
+isSafeInteger()	               Checks whether a value is a safe integer
+toExponential(x)               	Converts a number into an exponential notation
+toFixed(x)	               Formats a number with x numbers of digits after the decimal point
+toLocaleString()               	Converts a number into a string, based on the locale settings
+toPrecision(x)	               Formats a number to x length
+toString()	               Converts a number to a string
+valueOf()	               Returns the primitive value of a number
+
+Number()	                     Returns a number, converted from its argument.
+parseFloat()    	              Parses its argument and returns a floating point number
+parseInt()	                   Parses its argument and returns an integer
+
+                                           Properties of Numbers
+
+Property	                                       Description
+MAX_VALUE	                          Returns the largest number possible in JavaScript
+MIN_VALUE	                          Returns the smallest number possible in JavaScript
+POSITIVE_INFINITY	                          Represents infinity (returned on overflow)
+NEGATIVE_INFINITY	                          Represents negative infinity (returned on overflow)
+NaN	                          Represents a "Not-a-Number" value
+
+
+                                     Arrays
+
+const array_name = [item1, item2, ...]; 
+                   &
+const cars = new Array("Saab", "Volvo", "BMW");
+
+                                         Array Methods
+
+Method	                                         Description
+concat()	                                Joins two or more arrays, and returns a copy of the joined arrays
+copyWithin()	                                Copies array elements within the array, to and from specified positions
+entries()	                                Returns a key/value pair Array Iteration Object
+every()	                                Checks if every element in an array pass a test
+fill()	                                Fill the elements in an array with a static value
+filter()	                                Creates a new array with every element in an array that pass a test
+find()	                                Returns the value of the first element in an array that pass a test
+findIndex()	                                Returns the index of the first element in an array that pass a test
+forEach()	                                Calls a function for each array element
+from()	                                Creates an array from an object
+includes()	                                Check if an array contains the specified element
+indexOf()	                                Search the array for an element and returns its position
+isArray()                               	Checks whether an object is an array
+join()	                                Joins all elements of an array into a string
+keys()                                	Returns a Array Iteration Object, containing the keys of the original array
+lastIndexOf()	                                Search the array for an element, starting at the end, and returns its position
+map()	                                Creates a new array with the result of calling a function for each array element
+pop()	                                Removes the last element of an array, and returns that element
+push()	                                Adds new elements to the end of an array, and returns the new length
+reduce()                                	Reduce the values of an array to a single value (going left-to-right)
+reduceRight()	                                Reduce the values of an array to a single value (going right-to-left)
+reverse()	                                Reverses the order of the elements in an array
+shift()	                                Removes the first element of an array, and returns that element
+slice()	                                Selects a part of an array, and returns the new array
+some()	                                Checks if any of the elements in an array pass a test
+sort()	                                Sorts the elements of an array
+splice()                                	Adds/Removes elements from an array
+toString()	                                Converts an array to a string, and returns the result
+unshift()	                                Adds new elements to the beginning of an array, and returns the new length
+valueOf()	                                Returns the primitive value of an array
+
+Property                                      	Description
+
+constructor	                                Returns the function that created the Array object's prototype
+length	                                    Sets or returns the number of elements in an array
+prototype	                                  Allows you to add properties and methods to an Array object
+
+
+
+                                              DATE
+const d = new Date();
+           There are 4 ways to create a new date object:
+new Date()
+new Date(year, month, day, hours, minutes, seconds, milliseconds)
+new Date(milliseconds)
+new Date(date string)
+/                                             DATE GET METHOD
+
+Method	                 Description
+getFullYear()	                 Get the year as a four digit number (yyyy)
+getMonth()	                 Get the month as a number (0-11)
+getDate()	                 Get the day as a number (1-31)
+getHours()	                 Get the hour (0-23)
+getMinutes()	                 Get the minute (0-59)
+getSeconds()	                 Get the second (0-59)
+getMilliseconds()	                 Get the millisecond (0-999)
+getTime()	                 Get the time (milliseconds since January 1, 1970)
+getDay()	                 Get the weekday as a number (0-6)
+Date.now()	                 Get the time. ECMAScript 5.
+                                         
+/                                             DATE SET METHOD
+Method	                        Description
+setDate()	                        Set the day as a number (1-31)
+setFullYear()	                        Set the year (optionally month and day)
+setHours()	                        Set the hour (0-23)
+setMilliseconds()	                        Set the milliseconds (0-999)
+setMinutes()	                        Set the minutes (0-59)
+setMonth()	                        Set the month (0-11)
+setSeconds()	                        Set the seconds (0-59)
+setTime()	                        Set the time (milliseconds since January 1, 1970)
+
+                               MATH 
+Math.round(x)	                      Returns x rounded to its nearest integer
+Math.ceil(x)	                      Returns x rounded up to its nearest integer
+Math.floor(x)	                      Returns x rounded down to its nearest integer
+Math.trunc(x)	                      Returns the integer part of x (new in ES6)
+Math.random()                       returns a random number between 0 (inclusive),  and 1 (exclusive):
+
+                               FOR LOOPS
+
+SIMPLE FOR LOOP:   for (statement 1; statement 2; statement 3) {
+  // code block to be executed
+}
+
+FOR IN LOOP : The JavaScript for in statement loops through the properties of an Object:
+for (key in object) {
+  // code block to be executed
+}
+
+                             The While Loop
+while (condition) {
+  // code block to be executed
+}
+ 
+                             do while loop
+do {
+  // code block to be executed
+}
+while (condition);
+
+                                               JavaScript Sets
+                             A JavaScript Set is a collection of unique values.
+                             Each value can only occur once in a Set.
+
+           Method	                                Description
+new Set()	                                Creates a new Set
+add()	                                Adds a new element to the Set
+delete()	                                Removes an element from a Set
+has()	                                Returns true if a value exists in the Set
+forEach()	                                Invokes a callback for each element in the Set
+values()	                                Returns an iterator with all the values in a Set
+
+           Property                                	Description
+size                                	Returns the number of elements in a Set
+
+const letters = new Set(["a","b","c"]);
+
+                                             JavaScript Maps
+                             A Map holds key-value pairs where the keys can be any datatype.
+                             A Map remembers the original insertion order of the keys.
+
+In JavaScript there are 5 different data types that can contain values:
+string , number , boolean , object , function
+
+There are 6 types of objects:
+Object , Date , Array , String , Number , Boolean
+
+And 2 data types that cannot contain values:
+null , undefined
+
+The typeof Operator:
+You can use the typeof operator to find the data type of a JavaScript variable.
+
+                                     Regular Expresssion
+Modifier	                            Description	Try it
+i	Perform                             case-insensitive matching	
+g	Perform                             a global match (find all matches rather than stopping after the first match)	
+m	Perform                             multiline matching
+
+                                try,catch,throw,finally
+
+  try {
+  Block of code to try
+}
+catch(err) {
+  Block of code to handle errors
+}
+
+                                  Arrow Function
+
+  let myFunction = (a, b) => a * b;
+
+
+
+    
+                                 JavaScript Classes
+
+  class ClassName {
+  constructor() { ... }
+}
+
+
+
+                                   Class Methods
+                    
+  class ClassName {
+  constructor() { ... }
+  method_1() { ... }
+  method_2() { ... }
+  method_3() { ... }
+}
+
+                                  Modules
+  Break up the codes in to sepreate files.
+ - export{name,Of,variables witch want to export},
+import like as: import { name, age } from "./person.js";
+
+
+                              JSON
+
+  Converting a JSON Text to a JavaScript Object : JSON.parse()
+Convert a JavaScript object into a string with JSON.stringify().
+

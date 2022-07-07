@@ -1,0 +1,185 @@
+                        mongoDb
+
+mongod --version             -to show version of it
+
+
+db    -DATABASE     dbs   -DATABASES
+db.stats()        -to find detail about db;
+
+show dbs;                        - show all DATABASES
+use dbName                       - create/use existing db;
+db.dropDatabase                  -Delete database
+
+show collections                                   -to show collections in db;
+db.createCollection('nameofcollectn')              -to create collections
+db.nameofcollectn.drop()                        -to delete collection
+
+db.collectionNme.find()                 -to show data of collection
+db.collectionNme.find({},{field_Name:1,field_Name:0})  -to show perticular data of collections 1 for show 0 for hide.
+db.collectionNme.find().pretty()            -to show data of collection in prettified.
+db.collectionNme.findOne({fild:"xyz"})          -to find perticular documents
+db.collectionNme.find({fild:"xyz"},{_id:0})     -to find documents without show id
+db.collectionNme.find().limit(n)                -to show documents in limit
+db.collectionNme.find().limit(n).skip(n)       -to show documents in limit & start from passed number in skip
+db.collectionNme.find().count()                -to count documents 
+db.collectionNme.find().sort({key:1/-1})       -to sort documents,1 for AESC,-1 for DESC 
+
+
+db.collectionNme.insert({fild:"",field:""...})   -to insert data row
+db.collectionNme.inserMany([{},{},...])          -to insert many row in collection
+
+db.collectionNme.update({target/key field},{inset new data which want})  -to update row
+db.collectionNme.update({target/key field},{inset new data which want},
+upsert:true)                              -to update row and if not exist then make it new
+db.collectionNme.update({Target filed},{$inc/$rename/.. : {data}}) -to give clause/query...
+db.COLLECTION_NAME.save({_id:ObjectId(),NEW_DATA})     -to update data by the ID;
+db.collectionNme.findOneAndUpdate({target filed},{$set:{Update data}})   -to update by specific field.
+
+
+db.collectionNme.remove({target field})       -to delete data row
+db.collectionNme.remove({})               -to delete whole collection or Truncate
+db.collectionNme.remove({target field},n)     -to find that field delete only n name number of them
+
+
+db.collectionNme.find({ $and/$or/$nor/$not: [ {<key1>:<value1>}, { <key2>:<value2>} ] }) 
+
+Operation	                    Syntax	         
+Equality	           {<key>:{$eg;<value>}}	 
+Less Than	           {<key>:{$lt:<value>}}	
+Less Than Equals	   {<key>:{$lte:<value>}}	
+Greater Than	       {<key>:{$gt:<value>}}	
+Greater Than Equals	   {<key>:{$gte:<value>}}	
+Not Equals	           {<key>:{$ne:<value>}}	
+Values in an array	   {<key>:{$in:[<value1>,
+                       <value2>,……<valueN>]}}	
+Values not in an array {<key>:{$nin:<value>}}	
+
+
+INDEXES:
+db.collectionNme.find({key}).explain('executionStats')   -to see the time to run the query
+        -in the above query we see the execuionTimemillis and TotaoDocsExaminde which are important to analayze..
+        -After indexing we can see the the diffrent of to run the above query...
+
+db.collectionNme.createIndex({field_Name:1})            -to give indext to that field
+db.collectionNme.getIndexes()                  -to check indexes which we give to show
+db.collectionNme.dropIndex('NameofIndex')       -to remove index from that field
+            -NameOfIndex are get from the above getIndexes query.
+
+            fastest way to find the query is by the _id.
+
+
+Aggregations: Methods
+
+db.collectionNme.aggregate([
+    {$....},                                             -Basic syntex
+    {$....},                                          
+    ])          
+ex: db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])
+ 
+Expression	          Description	                                                                         Example
+$sum	    Sums up the defined value from all documents in the collection.	                    db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : "$likes"}}}])
+$avg	    Calculates the average of all given values from all documents in the collection.	db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$avg : "$likes"}}}])
+$min	    Gets the minimum of the corresponding values from all documents in the collection.	db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$min : "$likes"}}}])
+$max	    Gets the maximum of the corresponding values from all documents in the collection.	db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$max : "$likes"}}}])
+$push	    Inserts the value to an array in the resulting document.	                        db.mycol.aggregate([{$group : {_id : "$by_user", url : {$push: "$url"}}}])
+$addToSet	Inserts the value to an array in the resulting document but does not create 
+            duplicates.                                                                     	db.mycol.aggregate([{$group : {_id : "$by_user", url : {$addToSet : "$url"}}}])
+$first	    Gets the first document from the source documents according to the grouping.        db.mycol.aggregate([{$group : {_id : "$by_user", first_url : {$first : "$url"}}}])
+             Typically this makes only sense together with some previously applied “$sort”-stage.
+                                                                                                
+$last	    Gets the last document from the source documents according to the grouping.         db.mycol.aggregate([{$group : {_id : "$by_user", last_url : {$last : "$url"}}}])
+             Typically this makes only sense together with some previously applied “$sort”-stage.	
+
+
+Pipeline Concept in short :      $group ,$match
+
+
+Replication:  Replication is the process of synchronizing data across multiple servers.
+   Replication provides redundancy and increases data availability with multiple copies
+   of data on different database servers. Replication protects a database from the loss
+   of a single server. Replication also allows you to recover from hardware failure and 
+   service interruptions. With additional copies of the data, you can dedicate one to 
+   disaster recovery, reporting, or backup.
+
+
+Reletionship :
+  1 > Embeded                                   
+    db.users.insert({
+	{
+	"_id":ObjectId("52ffc33cd85242f436000001"),
+	"name": "Tom Benzamin",
+	"address": [{
+		"building": "22 A, Indiana Apt",	
+		"state": "California"
+	},]
+	}
+    })
+     
+   2 > Referenced
+     {
+   "_id":ObjectId("52ffc33cd85242f436000001"),
+    "name": "Tom Benzamin",
+   "address_ids": [
+      ObjectId("52ffc4a5d85242602e000000"),
+      ObjectId("52ffc4a5d85242602e000001")
+   ]
+   }
+
+DB Referenced:
+$ref − This field specifies the collection of the referenced document
+
+$id − This field specifies the _id field of the referenced document
+
+$db − This is an optional field and contains the name of the database
+      in which the referenced document lies
+
+Covered Query :-
+A covered query is a query in which −
+All the fields in the query are part of an index.
+All the fields returned in the query are in the same index.
+
+Analyzing Queries:
+                   .explain()
+                   .hint()
+
+Atomic Operations :    .findAndModify({....})
+
+ Ex:           db.products.findAndModify({ 
+                query:{_id:2,product_available:{$gt:0}}, 
+                update:{ 
+                $inc:{product_available:-1}, 
+                $push:{product_bought_by:{customer:"rob",date:"9-Jan-2014"}} 
+                }    
+                })
+
+
+Map Reduce :
+db.collection.mapReduce(    //map is a javascript function that maps a value with a key and emits a key-value pair
+   function() {emit(key,value);},  //reduce is a javascript function that reduces or groups all the documents having the same key
+   function(key,values) {return reduceFunction}, {   //reduce function
+      out: collection,    //out specifies the location of the map-reduce query result
+      query: document,    //query specifies the optional selection criteria for selecting documents
+      sort: document,    //sort specifies the optional sort criteria
+      limit: number      //limit specifies the optional maximum number of documents to be returned
+   }
+)
+
+Text Serach:
+1. Create index 
+2. for use of it : db.collectionNme.find({$text:{$serach:"searchig text which want"}})
+
+Regular Expression:  $regex 
+  db.collectionNme.find({field:{$regex:"word that want to searchig"}}).pretty()
+                            or
+ db.collectionNme.find({field:/word that want to searchig/})
+
+db.posts.find({post_text:{$regex:"tutorialspoint"}}).pretty()
+db.posts.find({post_text:/tutorialspoint/})
+ 
+  Using regex Expression with Case Insensitive:   $options:"$i"
+
+  db.posts.find({post_text:{$regex:"tutorialspoint",$options:"$i"}})  
+
+
+  NOTE : some topic is left from tutorialspoint...........
+   

@@ -1,0 +1,14 @@
+// const fs = require('fs');             
+// const data = fs.readFileSync('./flderName/test.txt');
+// console.log(data.toString());
+// console.log('This is blocking of code way...')
+
+ 
+// const fs = require('fs');
+
+// fs.readFile('./flderName/test.txt',(err,data)=>{
+//      if(err) console.log(err);
+//      console.log(data.toString());
+// })
+// console.log('This is Non-blocking of code way...')
+

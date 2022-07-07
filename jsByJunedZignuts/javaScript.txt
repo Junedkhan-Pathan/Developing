@@ -1,0 +1,56 @@
+var              //it is global scop key word so used in today life is not prefferrable
+
+const & let    // it is bloack scope so it used is widely....
+
+
+Hoisting : As i studied it is a method of declare of variable..
+
+console.log(greet);    //In this we first print variable then declare which is not allow but 
+var greet = "Hiii";     in "var" it not give error just give undefined.bcz in js the js whenever
+                        compile the var key variable are assign undefined so...
+
+
+console.log(greet);     //But in the case of let/const it give error and give message that first  
+let/const  greet = "Hiii";    assig.in this behind the concept of TDZ(temporal dead zone) in which 
+                             the let/const are lies.
+-------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------- 
+
+                 _____________________Data Types________________________
+
+*js is loosly or Dynemic language...like if we declare variable like below..
+    let age = 25;         //It is Number datatype
+    age = "TwentyFive"    //Now it is string so we can assign any variable to any values.
+                         //other language like C in we store specific value like int age = 23;
+
+*Primitive DT: it is single value typed...means used single value to store like below..
+   1>Numbers : In js all datatype like float,double,int,etc are just in included in Numbers.
+    ex :  let temp = 23 or let temp = -23 or temp = 23.00 
+
+   2>String , ex: let name = "Junedhan";
+  
+   3>Boolean: True/False     ex: let isEmpty = true;  
+
+   4> undefined : which is declared and not assiged variable is always undefined in JS.
+
+   5>BigInt: It is main invanted to overcome the int limit which are 2 pow 53-1
+        to check value max int value : Number.MAX_SAFE_INTEGER
+
+   6>Symbol : It is just use only for define to unique  but it is rarely use datatype.
+
+*Structural datatype:
+  1] Objects:
+       1.1} function:   //which are calleble & Non-data Structur
+       1.2} Arrays :   //for store group of value
+       1.3} Set  :       //for store group and unique value
+       1.4} Maps :   //In maps the key:value bur the key can be come obj type
+       1.5} Date : // Date is also one type of obj
+
+ *Structural root:
+   1> null :    it mens null.
+-------------------------------------------------------------------------------------------------   
+-------------------------------------------------------------------------------------------------   
+
+                  ___________Arrays & It's Methods_________________
+
+ const arr = ['java']
